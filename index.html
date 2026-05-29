@@ -193,8 +193,7 @@
 
     <script>
         // --- 老師請注意：在此處替換您的 Google Apps Script 網址 ---
-        // 教學在對話框下方
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZmxwrELHl91gykit7H-4Nam9MSdwpJoCex25dhqjgAmdHNnC59QbXpIrmOX8TiZhyfg/exec"; 
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwaiNZbsJSfTvO6YxLiYtbPFOqEaGxiJrf7TVGeKFQIwnO2ACe-WjB6Msy4KjfiP_An-Q/exec"; 
         
         // ------------------ 題庫設定 (共60題) ------------------
         const database = {
@@ -230,7 +229,7 @@
                 { q: "建國初期，政府沒收了哪個階層的土地及財產？", options: ["農民", "工人", "地主", "知識分子"], ans: 2 },
                 { q: "「一五計劃」積極發展農業和手工業，逐步實行什麼化？", options: ["私有化", "資本化", "集體化", "市場化"], ans: 2 },
                 { q: "新中國成立後首要考慮是確保什麼和政權穩定？", options: ["外交", "經濟", "文化", "教育"], ans: 1 },
-                { q: "鄧小平推動發展「社會主義______經濟」？", options: ["計劃", "市場", "封閉", "統制"], ans: 1 },
+                { q: "鄧小平推推發展「社會主義______經濟」？", options: ["計劃", "市場", "封閉", "統制"], ans: 1 },
                 { q: "「承包制」下，農民需要上繳一定數額的什麼？", options: ["農產品", "現金", "工業原料", "外匯"], ans: 0 },
                 { q: "大躍進和文革除了導致經濟倒退，還造成了什麼物資不足？", options: ["石油", "鋼鐵", "糧食", "布匹"], ans: 2 },
                 { q: "六七暴動前夕，引發市民騷動的導火線是天星小輪加價多少？", options: ["一毫", "五仙", "一蚊", "兩仙"], ans: 1 },
@@ -606,7 +605,6 @@
         function uploadData(prize, qs) {
             const statusDiv = document.getElementById('upload-status');
             
-            // 如果老師尚未設定網址，顯示提示但不報錯
             if(GOOGLE_SCRIPT_URL === "YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE") {
                 statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle text-yellow-400 mr-2"></i>老師尚未連接資料庫，本次成績僅作本地顯示。';
                 statusDiv.classList.replace('bg-blue-900', 'bg-gray-800');
@@ -624,12 +622,13 @@
                 timeSeconds: timerSeconds
             };
 
-            // 使用 no-cors 模式發送 POST 請求至 Google Apps Script
+            // 採用 text/plain 避免部分瀏覽器因為 application/json 阻擋資料傳送
             fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                cache: 'no-cache',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8' 
+                },
                 body: JSON.stringify(data)
             })
             .then(() => {
@@ -638,9 +637,10 @@
                 statusDiv.classList.replace('text-blue-200', 'text-green-200');
             })
             .catch(err => {
-                statusDiv.innerHTML = '<i class="fas fa-times-circle text-red-400 mr-2"></i>上傳失敗，請截圖此畫面給老師。';
+                statusDiv.innerHTML = '<i class="fas fa-times-circle text-red-400 mr-2"></i>上傳失敗，請聯絡老師。';
                 statusDiv.classList.replace('bg-blue-900', 'bg-red-900');
                 statusDiv.classList.replace('text-blue-200', 'text-red-200');
+                console.error(err);
             });
         }
     </script>
