@@ -86,7 +86,6 @@
 </head>
 <body class="h-screen flex flex-col items-center justify-center">
 
-    <!-- 填寫資料畫面 -->
     <div id="intro-screen" class="w-full max-w-md p-8 bg-gray-900 bg-opacity-90 rounded-2xl border-2 border-yellow-500 shadow-2xl text-center z-10">
         <h1 class="text-3xl font-bold text-yellow-400 mb-6 tracking-wider">中三歷史<br><span class="text-5xl mt-2 block text-white drop-shadow-[0_0_10px_rgba(255,215,0,0.8)]">百萬富翁</span></h1>
         <p class="text-gray-300 mb-6">溫習範圍：建國初期至改革開放</p>
@@ -108,17 +107,13 @@
         <p id="form-error" class="text-red-500 mt-2 hidden text-sm">請填寫所有資料！</p>
     </div>
 
-    <!-- 遊戲主要畫面 -->
     <div id="game-screen" class="hidden w-full h-full max-w-6xl mx-auto flex flex-col md:flex-row p-4 gap-4">
         
-        <!-- 左側：主要問答區 -->
         <div class="flex-1 flex flex-col justify-between">
-            <!-- 頂部資訊列 -->
             <div class="flex justify-between items-center mb-4 bg-blue-900 bg-opacity-50 p-4 rounded-xl border border-blue-500">
                 <div class="text-yellow-400 font-bold text-xl"><i class="fas fa-user-graduate mr-2"></i><span id="display-name"></span></div>
                 <div class="text-white font-bold text-2xl flex items-center"><i class="fas fa-stopwatch mr-2 text-blue-300"></i><span id="timer-display">00:00</span></div>
                 
-                <!-- 錦囊區 -->
                 <div class="flex gap-2">
                     <button id="btn-5050" onclick="use5050()" class="w-12 h-12 rounded-full border-2 border-yellow-400 bg-blue-800 text-yellow-400 font-bold hover:bg-blue-700 transition">50:50</button>
                     <button id="btn-audience" onclick="useAudience()" class="w-12 h-12 rounded-full border-2 border-yellow-400 bg-blue-800 text-yellow-400 font-bold hover:bg-blue-700 transition"><i class="fas fa-users"></i></button>
@@ -126,7 +121,6 @@
                 </div>
             </div>
 
-            <!-- 問題區 -->
             <div class="flex-1 flex items-center justify-center mb-8">
                 <div class="w-full border-2 border-white rounded-xl bg-gradient-to-b from-blue-900 to-blue-950 p-8 text-center shadow-[0_0_20px_rgba(0,100,255,0.5)]">
                     <h2 class="text-yellow-500 font-bold mb-2">第 <span id="q-number">1</span> 題 <span id="q-difficulty" class="text-sm ml-2 text-gray-400"></span></h2>
@@ -134,7 +128,6 @@
                 </div>
             </div>
 
-            <!-- 答案區 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 gap-x-12 mb-4 w-full px-8">
                 <button id="ans-0" onclick="selectAnswer(0)" class="answer-btn text-lg md:text-xl"><span class="text-yellow-500 font-bold mr-4">A:</span><span id="text-0"></span></button>
                 <button id="ans-1" onclick="selectAnswer(1)" class="answer-btn text-lg md:text-xl"><span class="text-yellow-500 font-bold mr-4">B:</span><span id="text-1"></span></button>
@@ -143,24 +136,19 @@
             </div>
         </div>
 
-        <!-- 右側：獎金梯 -->
         <div class="w-full md:w-64 prize-ladder rounded-xl p-4 flex flex-col-reverse text-right font-mono text-sm md:text-base overflow-y-auto max-h-[30vh] md:max-h-full">
-            <!-- 由 JS 動態生成 -->
-        </div>
+            </div>
     </div>
 
-    <!-- 錦囊 Modal：問觀眾 -->
     <div id="modal-audience" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
         <div class="bg-blue-900 border-2 border-yellow-400 rounded-xl p-8 max-w-md w-full text-center shadow-2xl">
             <h3 class="text-2xl font-bold text-yellow-400 mb-4"><i class="fas fa-users mr-2"></i>現場觀眾投票結果</h3>
             <div class="bar-container" id="audience-chart">
-                <!-- 柱狀圖由 JS 產生 -->
-            </div>
+                </div>
             <button onclick="closeModal('modal-audience')" class="mt-8 bg-gray-700 hover:bg-gray-600 text-white py-2 px-6 rounded-full font-bold">明白</button>
         </div>
     </div>
 
-    <!-- 錦囊 Modal：問朋友 -->
     <div id="modal-friend" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
         <div class="bg-blue-900 border-2 border-yellow-400 rounded-xl p-8 max-w-md w-full text-center shadow-2xl">
             <h3 class="text-2xl font-bold text-yellow-400 mb-4"><i class="fas fa-phone-volume mr-2"></i>打電話問朋友</h3>
@@ -171,7 +159,6 @@
         </div>
     </div>
 
-    <!-- 結算畫面 -->
     <div id="result-screen" class="hidden w-full max-w-lg p-8 bg-gray-900 bg-opacity-95 rounded-2xl border-4 border-yellow-500 shadow-[0_0_30px_rgba(255,215,0,0.5)] text-center z-10">
         <h1 id="result-title" class="text-4xl font-bold text-yellow-400 mb-2">遊戲結束</h1>
         <p id="result-subtitle" class="text-xl text-gray-300 mb-8">感謝你的參與！</p>
@@ -188,7 +175,7 @@
             <i class="fas fa-spinner fa-spin mr-2"></i>成績上傳至老師資料庫中...
         </div>
 
-        <button onclick="location.reload()" class="millionaire-btn px-8 py-3 text-lg font-bold text-white">再玩一次</button>
+        <button onclick="restartGame()" class="millionaire-btn px-8 py-3 text-lg font-bold text-white">再玩一次</button>
     </div>
 
     <script>
@@ -642,6 +629,47 @@
                 statusDiv.classList.replace('text-blue-200', 'text-red-200');
                 console.error(err);
             });
+        }
+
+        // ------------------ 新增：無縫重新啟動遊戲功能 ------------------
+        function restartGame() {
+            // 1. 重設遊戲變數
+            currentQIndex = 0;
+            lifelines = { fifty: true, audience: true, friend: true };
+            timerSeconds = 0;
+            isAnswering = false;
+            guaranteedPrize = 0;
+
+            // 確保「遊戲結束」的標題顏色變回金色（以防上一局答錯變紅色）
+            document.getElementById('result-title').classList.remove('text-red-500');
+            document.getElementById('result-title').classList.add('text-yellow-400');
+
+            // 2. 恢復錦囊按鈕的可用狀態
+            document.getElementById('btn-5050').disabled = false;
+            document.getElementById('btn-5050').classList.remove('opacity-30');
+            document.getElementById('btn-audience').disabled = false;
+            document.getElementById('btn-audience').classList.remove('opacity-30');
+            document.getElementById('btn-friend').disabled = false;
+            document.getElementById('btn-friend').classList.remove('opacity-30');
+
+            // 3. 切換畫面：隱藏結算畫面，重新顯示遊戲畫面
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+
+            // 4. 重置上傳狀態的 UI (為了下一局結束時上傳做準備)
+            const statusDiv = document.getElementById('upload-status');
+            statusDiv.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>成績上傳至老師資料庫中...';
+            statusDiv.className = 'text-sm font-bold p-3 rounded-lg mb-6 bg-blue-900 text-blue-200';
+
+            // 清理上一局可能未完成的計時器，避免時間跳動異常
+            clearInterval(timerInterval);
+
+            // 5. 重新抽題並開始遊戲
+            buildGameDeck();
+            renderPrizeLadder();
+            document.getElementById('timer-display').textContent = "00:00";
+            startTimer();
+            loadQuestion();
         }
     </script>
 </body>
